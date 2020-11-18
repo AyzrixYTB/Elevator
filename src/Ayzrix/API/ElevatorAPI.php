@@ -14,7 +14,7 @@ class ElevatorAPI {
      * @param int $y
      * @param int $z
      * @param Level $level
-     * @return Block
+     * @return Block|null
      */
     public static function isElevatorBlock(int $x, int $y, int $z, Level $level) {
         $elevator = $level->getBlockAt($x, $y, $z);

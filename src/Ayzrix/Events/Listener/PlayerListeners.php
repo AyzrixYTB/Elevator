@@ -50,7 +50,7 @@ class PlayerListeners implements Listener
     public function onSneak(PlayerToggleSneakEvent $event){
         $player = $event->getPlayer();
 
-        if (!$event->isSneaking(true)) return false;
+        if (!$event->isSneaking()) return false;
 
         if ($player->getLevel()->getBlock($player->subtract(0, 1, 0))->getId() !== Main::getInstance()->getConfig()->get("Block-ID") or $player->getLevel()->getBlock($player->subtract(0, 1, 0))->getDamage() !== Main::getInstance()->getConfig()->get("Block-META")) return false;
 
