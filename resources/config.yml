@@ -1,0 +1,8 @@
+---
+#Elevator ID & META
+Block-ID: 155
+Block-META: 0
+
+#Message when the plugin did not find any other elevator above or below.
+Message_No_Block_Found: "§cNo block was found"
+...
