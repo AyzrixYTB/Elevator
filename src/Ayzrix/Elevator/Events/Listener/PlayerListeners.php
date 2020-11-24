@@ -18,10 +18,11 @@ class PlayerListeners implements Listener
      */
     public function onJump(PlayerJumpEvent $event){
         $player = $event->getPlayer();
-
-        if ($player->getLevel()->getBlock($player->subtract(0, 1, 0))->getId() !== Main::getInstance()->getConfig()->get("Block-ID") or $player->getLevel()->getBlock($player->subtract(0, 1, 0))->getDamage() !== Main::getInstance()->getConfig()->get("Block-META")) return false;
-
         $level = $player->getLevel();
+        $config = Main::getInstance()->getConfig();
+
+        if ($level->getBlock($player->subtract(0, 1, 0))->getId() !== $config->get("Block-ID") or $level->getBlock($player->subtract(0, 1, 0))->getDamage() !== $config->get("Block-META")) return false;
+
         $x = (int) floor($player->getX());
         $y = (int) floor($player->getY());
         $z = (int) floor($player->getZ());
@@ -37,7 +38,7 @@ class PlayerListeners implements Listener
         if ($found) {
             $player->teleport(new Vector3($x+0.5, $y+1, $z+0.5));
         } else {
-            $player->sendMessage(Main::getInstance()->getConfig()->get("Message_No_Block_Found"));
+            $player->sendMessage($config->get("Message_No_Block_Found"));
         }
 
         return true;
@@ -49,12 +50,14 @@ class PlayerListeners implements Listener
      */
     public function onSneak(PlayerToggleSneakEvent $event){
         $player = $event->getPlayer();
+        $level = $player->getLevel();
+        $config = Main::getInstance()->getConfig();
 
         if (!$event->isSneaking()) return false;
 
-        if ($player->getLevel()->getBlock($player->subtract(0, 1, 0))->getId() !== Main::getInstance()->getConfig()->get("Block-ID") or $player->getLevel()->getBlock($player->subtract(0, 1, 0))->getDamage() !== Main::getInstance()->getConfig()->get("Block-META")) return false;
+        if ($level->getBlock($player->subtract(0, 1, 0))->getId() !== $config->get("Block-ID") or $level->getBlock($player->subtract(0, 1, 0))->getDamage() !== $config->get("Block-META")) return false;
 
-        $level = $player->getLevel();
+
         $x = (int) floor($player->getX());
         $y = (int) floor($player->getY())-2;
         $z = (int) floor($player->getZ());
@@ -69,7 +72,7 @@ class PlayerListeners implements Listener
         if ($found) {
             $player->teleport(new Vector3($x+0.5, $y+1, $z+0.5));
         } else {
-            $player->sendMessage(Main::getInstance()->getConfig()->get("Message_No_Block_Found"));
+            $player->sendMessage($config->get("Message_No_Block_Found"));
         }
 
         return true;

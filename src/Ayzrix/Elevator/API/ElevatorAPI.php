@@ -18,8 +18,9 @@ class ElevatorAPI {
      */
     public static function isElevatorBlock(int $x, int $y, int $z, Level $level) {
         $elevator = $level->getBlockAt($x, $y, $z);
+        $config = Main::getInstance()->getConfig();
 
-        if ($elevator->getId() !== Main::getInstance()->getConfig()->get("Block-ID") or $elevator->getDamage() !== Main::getInstance()->getConfig()->get("Block-META")) {
+        if ($elevator->getId() !== $config->get("Block-ID") or $elevator->getDamage() !== $config->get("Block-META")) {
             return null;
         }
 
