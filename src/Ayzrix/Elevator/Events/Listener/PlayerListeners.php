@@ -1,9 +1,9 @@
 <?php
 
-namespace Ayzrix\Events\Listener;
+namespace Ayzrix\Elevator\Events\Listener;
 
-use Ayzrix\API\ElevatorAPI;
-use Ayzrix\Main;
+use Ayzrix\Elevator\API\ElevatorAPI;
+use Ayzrix\Elevator\Main;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJumpEvent;
 use pocketmine\event\player\PlayerToggleSneakEvent;

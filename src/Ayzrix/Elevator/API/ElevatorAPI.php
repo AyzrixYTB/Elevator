@@ -1,8 +1,8 @@
 <?php
 
-namespace Ayzrix\API;
+namespace Ayzrix\Elevator\API;
 
-use Ayzrix\Main;
+use Ayzrix\Elevator\Main;
 use pocketmine\block\Block;
 use pocketmine\level\Level;
 
