@@ -36,7 +36,16 @@ class PlayerListeners implements Listener
         }
 
         if ($found) {
-            $player->teleport(new Vector3($x+0.5, $y+1, $z+0.5));
+            if($config->get("Distance") === true) {
+                if ($player->distance(new Vector3($x + 0.5, $y + 1, $z + 0.5)) <= (int)$config->get("Max_Distance")) {
+                    $player->teleport(new Vector3($x + 0.5, $y + 1, $z + 0.5));
+                } else {
+                    $player->sendMessage($config->get("Message_Distance_Too_Hight"));
+                }
+            } else {
+                $player->teleport(new Vector3($x + 0.5, $y + 1, $z + 0.5));
+            }
+
         } else {
             $player->sendMessage($config->get("Message_No_Block_Found"));
         }
@@ -70,7 +79,15 @@ class PlayerListeners implements Listener
         }
 
         if ($found) {
-            $player->teleport(new Vector3($x+0.5, $y+1, $z+0.5));
+            if($config->get("Distance") === true) {
+                if ($player->distance(new Vector3($x + 0.5, $y + 1, $z + 0.5)) <= (int)$config->get("Max_Distance")) {
+                    $player->teleport(new Vector3($x + 0.5, $y + 1, $z + 0.5));
+                } else {
+                    $player->sendMessage($config->get("Message_Distance_Too_Hight"));
+                }
+            } else {
+                $player->teleport(new Vector3($x + 0.5, $y + 1, $z + 0.5));
+            }
         } else {
             $player->sendMessage($config->get("Message_No_Block_Found"));
         }
