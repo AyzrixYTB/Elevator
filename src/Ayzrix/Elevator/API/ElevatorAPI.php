@@ -2,7 +2,7 @@
 
 namespace Ayzrix\Elevator\API;
 
-use Ayzrix\Elevator\Main;
+use Ayzrix\Elevator\Utils\Utils;
 use pocketmine\block\Block;
 use pocketmine\level\Level;
 
@@ -16,11 +16,14 @@ class ElevatorAPI {
      * @param Level $level
      * @return Block|null
      */
-    public static function isElevatorBlock(int $x, int $y, int $z, Level $level) {
+    public static function isElevatorBlock(int $x, int $y, int $z, Level $level): ?Block {
         $elevator = $level->getBlockAt($x, $y, $z);
-        $config = Main::getInstance()->getConfig();
+        $block = Utils::getIntoConfig("block");
+        $block = explode(":",$block);
+        $id = (int)$block[0];
+        $damage = (int)$block[1];
 
-        if ($elevator->getId() !== $config->get("Block-ID") or $elevator->getDamage() !== $config->get("Block-META")) {
+        if ($elevator->getId() !== $id or $elevator->getDamage() !== $damage) {
             return null;
         }
 

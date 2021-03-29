@@ -3,25 +3,23 @@
 namespace Ayzrix\Elevator\Events\Listener;
 
 use Ayzrix\Elevator\API\ElevatorAPI;
-use Ayzrix\Elevator\Main;
+use Ayzrix\Elevator\Utils\Utils;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJumpEvent;
 use pocketmine\event\player\PlayerToggleSneakEvent;
 use pocketmine\math\Vector3;
 
-class PlayerListeners implements Listener
-{
+class PlayerListeners implements Listener {
 
-    /**
-     * @param PlayerJumpEvent $event
-     * @return bool
-     */
-    public function onJump(PlayerJumpEvent $event){
+    public function PlayerJump(PlayerJumpEvent $event): bool {
         $player = $event->getPlayer();
         $level = $player->getLevel();
-        $config = Main::getInstance()->getConfig();
+        $block = Utils::getIntoConfig("block");
+        $block = explode(":",$block);
+        $id = (int)$block[0];
+        $damage = (int)$block[1];
 
-        if ($level->getBlock($player->subtract(0, 1, 0))->getId() !== $config->get("Block-ID") or $level->getBlock($player->subtract(0, 1, 0))->getDamage() !== $config->get("Block-META")) return false;
+        if ($level->getBlock($player->subtract(0, 1))->getId() !== $id or $level->getBlock($player->subtract(0, 1))->getDamage() !== $damage) return false;
 
         $x = (int) floor($player->getX());
         $y = (int) floor($player->getY());
@@ -36,36 +34,25 @@ class PlayerListeners implements Listener
         }
 
         if ($found) {
-            if($config->get("Distance") === true) {
-                if ($player->distance(new Vector3($x + 0.5, $y + 1, $z + 0.5)) <= (int)$config->get("Max_Distance")) {
+            if(Utils::getIntoConfig("distance") === true) {
+                if ($player->distance(new Vector3($x + 0.5, $y + 1, $z + 0.5)) <= (int)Utils::getIntoConfig("max_distance")) {
                     $player->teleport(new Vector3($x + 0.5, $y + 1, $z + 0.5));
-                } else {
-                    $player->sendMessage($config->get("Message_Distance_Too_Hight"));
-                }
-            } else {
-                $player->teleport(new Vector3($x + 0.5, $y + 1, $z + 0.5));
-            }
-
-        } else {
-            $player->sendMessage($config->get("Message_No_Block_Found"));
-        }
-
+                } else $player->sendMessage(Utils::getConfigMessage("distance_too_hight"));
+            } else $player->teleport(new Vector3($x + 0.5, $y + 1, $z + 0.5));
+        } else $player->sendMessage(Utils::getConfigMessage("no_elevator_found"));
         return true;
     }
 
-    /**
-     * @param PlayerToggleSneakEvent $event
-     * @return bool
-     */
-    public function onSneak(PlayerToggleSneakEvent $event){
+    public function PlayerToggleSneak(PlayerToggleSneakEvent $event): bool {
         $player = $event->getPlayer();
         $level = $player->getLevel();
-        $config = Main::getInstance()->getConfig();
+        $block = Utils::getIntoConfig("block");
+        $block = explode(":",$block);
+        $id = (int)$block[0];
+        $damage = (int)$block[1];
 
         if (!$event->isSneaking()) return false;
-
-        if ($level->getBlock($player->subtract(0, 1, 0))->getId() !== $config->get("Block-ID") or $level->getBlock($player->subtract(0, 1, 0))->getDamage() !== $config->get("Block-META")) return false;
-
+        if ($level->getBlock($player->subtract(0, 1))->getId() !== $id or $level->getBlock($player->subtract(0, 1))->getDamage() !== $damage) return false;
 
         $x = (int) floor($player->getX());
         $y = (int) floor($player->getY())-2;
@@ -73,25 +60,18 @@ class PlayerListeners implements Listener
         $found = false;
         $y--;
         for (; $y >= 0; $y--) {
-            if ($found = (ElevatorAPI::isElevatorBlock($x, $y, $z, $level) !== null)){
+            if ($found = (ElevatorAPI::isElevatorBlock($x, $y, $z, $level) !== null)) {
                 break;
             }
         }
 
         if ($found) {
-            if($config->get("Distance") === true) {
-                if ($player->distance(new Vector3($x + 0.5, $y + 1, $z + 0.5)) <= (int)$config->get("Max_Distance")) {
+            if(Utils::getIntoConfig("distance") === true) {
+                if ($player->distance(new Vector3($x + 0.5, $y + 1, $z + 0.5)) <= (int)Utils::getIntoConfig("max_distance")) {
                     $player->teleport(new Vector3($x + 0.5, $y + 1, $z + 0.5));
-                } else {
-                    $player->sendMessage($config->get("Message_Distance_Too_Hight"));
-                }
-            } else {
-                $player->teleport(new Vector3($x + 0.5, $y + 1, $z + 0.5));
-            }
-        } else {
-            $player->sendMessage($config->get("Message_No_Block_Found"));
-        }
-
+                } else $player->sendMessage(Utils::getConfigMessage("distance_too_hight"));
+            } else $player->teleport(new Vector3($x + 0.5, $y + 1, $z + 0.5));
+        } else $player->sendMessage(Utils::getConfigMessage("no_elevator_found"));
         return true;
     }
 }

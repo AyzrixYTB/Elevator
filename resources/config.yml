@@ -1,17 +1,15 @@
 ---
-# Elevator ID & META
-Block-ID: 155
-Block-META: 0
+prefix: "§6[§fElevatorBlock§6]"
+
+# Elevator ID & META ("ID:META")
+block: "155:0"
 
 # Enable or disable the distance system (true|false)
-Distance: true
+distance: true
 
 # Maximum distance between 2 elevators
-Max_Distance: 5
+max_distance: 5
 
-# Message when the plugin did not find any other elevator above or below.
-Message_No_Block_Found: "§cNo elevator was found"
-
-# Message when the plugin find an elevator, but the distance is too hight
-Message_Distance_Too_Hight: "§cAn elevator has been found, but it's too far"
+no_elevator_found: "{prefix} §cNo elevator was found"
+distance_too_hight: "{prefix} §cAn elevator has been found, but it's too far"
 ...
