@@ -1,4 +1,4 @@
-[![Discord](https://img.shields.io/discord/800828802921529355.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/wuNvKw948n) [![](https://poggit.pmmp.io/shield.api/ElevatorBlock)](https://poggit.pmmp.io/p/ElevatorBlock) [![](https://poggit.pmmp.io/shield.dl.total/ElevatorBlock)](https://poggit.pmmp.io/p/ElevatorBlock)
+[![Discord](https://img.shields.io/discord/800828802921529355.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/ruBKMD9a9J) [![](https://poggit.pmmp.io/shield.api/ElevatorBlock)](https://poggit.pmmp.io/p/ElevatorBlock) [![](https://poggit.pmmp.io/shield.dl.total/ElevatorBlock)](https://poggit.pmmp.io/p/ElevatorBlock)
 
 # Elevator
 A simple PocketMine-MP plugin that allows to create elevators on your server.
