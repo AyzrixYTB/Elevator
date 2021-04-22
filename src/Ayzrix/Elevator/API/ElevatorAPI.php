@@ -23,7 +23,7 @@ class ElevatorAPI {
         $id = (int)$block[0];
         $damage = (int)$block[1];
 
-        if ($elevator->getId() !== $id or $elevator->getDamage() !== $damage) {
+        if ($elevator->getId() !== $id or (Utils::getIntoConfig("use_meta") === true and $elevator->getDamage() !== $damage)) {
             return null;
         }
 

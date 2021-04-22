@@ -3,7 +3,8 @@ prefix: "§6[§fElevatorBlock§6]"
 
 # Elevator ID & META ("ID:META")
 block: "155:0"
-
+# EXAMPLE: If you are using the bone block, set to false to allow all rotations [Put anyway :0 on "block"]
+use_meta: true
 # Enable or disable the distance system (true|false)
 distance: true
 

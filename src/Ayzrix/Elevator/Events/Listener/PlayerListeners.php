@@ -19,7 +19,7 @@ class PlayerListeners implements Listener {
         $id = (int)$block[0];
         $damage = (int)$block[1];
 
-        if ($level->getBlock($player->subtract(0, 1))->getId() !== $id or $level->getBlock($player->subtract(0, 1))->getDamage() !== $damage) return false;
+        if ($level->getBlock($player->subtract(0, 1))->getId() !== $id or (Utils::getIntoConfig("use_meta") === true and $level->getBlock($player->subtract(0, 1))->getDamage() !== $damage)) return false;
 
         $x = (int) floor($player->getX());
         $y = (int) floor($player->getY());
@@ -52,7 +52,7 @@ class PlayerListeners implements Listener {
         $damage = (int)$block[1];
 
         if (!$event->isSneaking()) return false;
-        if ($level->getBlock($player->subtract(0, 1))->getId() !== $id or $level->getBlock($player->subtract(0, 1))->getDamage() !== $damage) return false;
+        if ($level->getBlock($player->subtract(0, 1))->getId() !== $id or (Utils::getIntoConfig("use_meta") === true and $level->getBlock($player->subtract(0, 1))->getDamage() !== $damage)) return false;
 
         $x = (int) floor($player->getX());
         $y = (int) floor($player->getY())-2;
