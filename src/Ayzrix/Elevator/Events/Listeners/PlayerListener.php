@@ -1,6 +1,6 @@
 <?php
 
-namespace Ayzrix\Elevator\Events\Listener;
+namespace Ayzrix\Elevator\Events\Listeners;
 
 use Ayzrix\Elevator\API\ElevatorAPI;
 use Ayzrix\Elevator\Utils\Utils;
@@ -9,9 +9,9 @@ use pocketmine\event\player\PlayerJumpEvent;
 use pocketmine\event\player\PlayerToggleSneakEvent;
 use pocketmine\math\Vector3;
 
-class PlayerListeners implements Listener {
+class PlayerListener implements Listener {
 
-    public function PlayerJump(PlayerJumpEvent $event): bool {
+    public function onPlayerJump(PlayerJumpEvent $event): bool {
         $player = $event->getPlayer();
         $level = $player->getLevel();
         $block = Utils::getIntoConfig("block");
@@ -21,12 +21,13 @@ class PlayerListeners implements Listener {
 
         if ($level->getBlock($player->subtract(0, 1))->getId() !== $id or (Utils::getIntoConfig("use_meta") === true and $level->getBlock($player->subtract(0, 1))->getDamage() !== $damage)) return false;
 
-        $x = (int) floor($player->getX());
-        $y = (int) floor($player->getY());
-        $z = (int) floor($player->getZ());
+        $x = (int)floor($player->getX());
+        $y = (int)floor($player->getY());
+        $z = (int)floor($player->getZ());
         $maxY = $level->getWorldHeight();
         $found = false;
         $y++;
+
         for (; $y <= $maxY; $y++) {
             if ($found = (ElevatorAPI::isElevatorBlock($x, $y, $z, $level) !== null)) {
                 break;
@@ -43,7 +44,7 @@ class PlayerListeners implements Listener {
         return true;
     }
 
-    public function PlayerToggleSneak(PlayerToggleSneakEvent $event): bool {
+    public function onPlayerToggleSneak(PlayerToggleSneakEvent $event): bool {
         $player = $event->getPlayer();
         $level = $player->getLevel();
         $block = Utils::getIntoConfig("block");
@@ -54,11 +55,12 @@ class PlayerListeners implements Listener {
         if (!$event->isSneaking()) return false;
         if ($level->getBlock($player->subtract(0, 1))->getId() !== $id or (Utils::getIntoConfig("use_meta") === true and $level->getBlock($player->subtract(0, 1))->getDamage() !== $damage)) return false;
 
-        $x = (int) floor($player->getX());
-        $y = (int) floor($player->getY())-2;
-        $z = (int) floor($player->getZ());
+        $x = (int)floor($player->getX());
+        $y = (int)floor($player->getY())-2;
+        $z = (int)floor($player->getZ());
         $found = false;
         $y--;
+
         for (; $y >= 0; $y--) {
             if ($found = (ElevatorAPI::isElevatorBlock($x, $y, $z, $level) !== null)) {
                 break;

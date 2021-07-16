@@ -22,8 +22,7 @@ class Utils {
                 $message = preg_replace("/[%]/", $arg, $message, 1);
             }
         }
-        $message = str_replace('{prefix}', self::getPrefix(), $message);
-        return $message;
+        return str_replace('{prefix}', self::getPrefix(), $message);
     }
 
     /**

@@ -8,7 +8,6 @@ use pocketmine\level\Level;
 
 class ElevatorAPI {
 
-
     /**
      * @param int $x
      * @param int $y

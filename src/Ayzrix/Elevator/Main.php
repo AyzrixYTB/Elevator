@@ -2,7 +2,7 @@
 
 namespace Ayzrix\Elevator;
 
-use Ayzrix\Elevator\Events\Listener\PlayerListeners;
+use Ayzrix\Elevator\Events\Listeners\PlayerListener;
 use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase {
@@ -13,7 +13,7 @@ class Main extends PluginBase {
     public function onEnable() {
         self::$instance = $this;
         $this->saveDefaultConfig();
-        $this->getServer()->getPluginManager()->registerEvents(new PlayerListeners(), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new PlayerListener(), $this);
     }
 
     /**
